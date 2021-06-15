@@ -8,6 +8,6 @@ module.exports = {
       return args;
     });
   },  
-  publicPath: process.env.NODE_ENV === "production" ? "/webpieces/" : "/"
+  publicPath: process.env.NODE_ENV === "production" ? "/geo-cities/" : "/"
 
 }
