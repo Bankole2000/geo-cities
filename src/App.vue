@@ -19,7 +19,6 @@
 
         <v-toolbar-title
           class="headline"
-          v-if="$vuetify.breakpoint.mdAndUp"
           :class="
             $vuetify.theme.dark ? 'white--text' : 'grey--text text--darken-3'
           "
@@ -32,7 +31,7 @@
       <v-btn
         icon
         @click="toggleSearchMode"
-        :class="$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-1'"
+        :class="$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0'"
         ><v-icon :color="searchMode ? 'primary' : ''">{{
           searchMode ? "mdi-magnify-minus" : "mdi-magnify"
         }}</v-icon></v-btn
@@ -46,7 +45,7 @@
       <v-btn
         to="/"
         @click="refresh"
-        class="mx-2"
+        :class="$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0'"
         color="primary"
         :icon="$vuetify.breakpoint.smAndDown"
         ><v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-earth</v-icon>
