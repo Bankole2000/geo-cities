@@ -9,8 +9,15 @@
     <v-card>
       <v-card-title class="headline"> 👋 Hello World </v-card-title>
       <v-divider></v-divider>
-      <v-card-text class="pt-2 grey--text text--darken-3">
-        <p class="mb-0">Hi! Sorry to bother you, but I need your help 🥺.</p>
+      <v-card-text
+        class="pt-2"
+        :class="
+          $vuetify.theme.dark
+            ? 'grey--text text--lighten-3'
+            : 'grey--text text--darken-3'
+        "
+      >
+        <p class="mb-0">Hi! I need your help 🥺.</p>
         <p>
           I'm trying to build a database of world <strong>countries</strong>,
           <strong>states</strong>, and <strong>cities</strong>. But a lot of the
@@ -18,9 +25,9 @@
           and I can't possibly get it all by myself.
         </p>
         <p>
-          So, please, if you notice a country with missing states, or cities
-          (maybe even your own!?) please add them kk? I'd be really grateful if
-          you could help. Thanks 🙂
+          So, if you notice any missing states, or cities (maybe even your
+          own!?) please add them kk? I'd be really grateful if you could help.
+          Thanks 🙂
         </p>
         <v-expand-transition>
           <v-alert v-show="message" color="info" dark>{{ message }}</v-alert>
@@ -49,7 +56,7 @@ export default {
   },
   methods: {
     acceptedToHelp() {
-      this.message = "🙏 Thanks for your help";
+      this.message = "🙏 Thanks! Awesome 😎";
       setTimeout(() => {
         this.dialog = false;
         this.message = "";

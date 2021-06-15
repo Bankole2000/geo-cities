@@ -2,11 +2,11 @@
   <v-navigation-drawer
     v-model="showAddCityDrawer"
     style="z-index: 6"
-    :style="{ width: $vuetify.breakpoint.smAndDown ? '100vw' : '' }"
+    :style="{ width: $vuetify.breakpoint.smAndDown ? '100vw' : '256px' }"
     right
     app
   >
-    <v-toolbar height="64px">
+    <v-toolbar height="72px">
       <v-btn icon @click="toggleAddCityDrawer(false)" text>
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
@@ -53,13 +53,10 @@
         type="text"
         v-model="cityData.name"
       ></v-text-field>
-
-      <v-text-field
-        readonly
-        :value="lat"
-        label="latitude"
-        hint="click/tap the map or drag the marker to set coordinates"
-      ></v-text-field>
+      <v-alert color="info" dark class="caption py-2"
+        >⚠ click map or drag marker to set coordinates</v-alert
+      >
+      <v-text-field readonly :value="lat" label="latitude"></v-text-field>
 
       <v-text-field readonly :value="long" label="longitude"></v-text-field>
       <v-expand-transition>
@@ -76,7 +73,12 @@
           </div>
         </v-alert>
       </v-expand-transition>
-      <v-btn :disabled="!formValid" block @click="checkCityData"
+      <v-btn
+        x-large
+        color="primary"
+        :disabled="!formValid"
+        block
+        @click="checkCityData"
         ><v-icon>mdi-plus-thick</v-icon> Add this City</v-btn
       >
     </v-container>

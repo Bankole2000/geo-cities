@@ -41,7 +41,14 @@
                       <span left class="mr-2" v-html="item.emoji">{{
                         item.emoji
                       }}</span>
-                      <span v-text="item.name" style="font-size: 1.2rem"></span>
+                      <span
+                        v-text="item.name"
+                        :style="{
+                          fontSize: $vuetify.breakpoint.mdAndUp
+                            ? '1.2rem'
+                            : '0.9rem',
+                        }"
+                      ></span>
                     </p>
                   </template>
                   <template v-slot:item="{ item }">
@@ -60,9 +67,6 @@
                   </template>
                 </v-autocomplete>
               </div>
-
-              <!-- No result -->
-              <div v-else class="no-result apollo">No result :(</div>
             </template>
           </ApolloQuery>
           <ApolloQuery
@@ -109,7 +113,11 @@
                         }}</span>
                         <span
                           v-text="item.name"
-                          style="font-size: 1.2rem"
+                          :style="{
+                            fontSize: $vuetify.breakpoint.mdAndUp
+                              ? '1.2rem'
+                              : '0.9rem',
+                          }"
                         ></span>
                       </p>
                     </template>
@@ -118,7 +126,7 @@
                         color="indigo"
                         class="headline font-weight-light white--text"
                       >
-                        {{ item.emoji }}
+                        {{ item.stateCode }}
                       </v-list-item-avatar>
                       <v-list-item-content>
                         <v-list-item-title
@@ -137,17 +145,18 @@
                   text
                   class="mt-2 text-capitalize"
                   @click="toggleAddStateDrawer(true)"
-                  ><v-icon left>mdi-map-marker-alert-outline</v-icon> State Data
-                  Missing? (Add a State)</v-btn
+                  ><v-icon left>mdi-map-marker-alert-outline</v-icon> State
+                  <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1"
+                    >Data</span
+                  >
+                  Missing? (Add
+                  {{ $vuetify.breakpoint.mdAndUp ? "a State)" : "it)" }}</v-btn
                 >
                 <!-- <AddStateModal
                   v-if="!selectedState"
                   :selectedCountry="selectedCountry"
                 /> -->
               </div>
-
-              <!-- No result -->
-              <div v-else class="no-result apollo">No result :(</div>
             </template>
           </ApolloQuery>
           <ApolloQuery
@@ -165,7 +174,7 @@
                   indeterminate
                   absolute
                   bottom
-                  color="error"
+                  color="primary"
                 ></v-progress-linear>
               </div>
 
@@ -195,16 +204,17 @@
                         }}</span>
                         <span
                           v-text="item.name"
-                          style="font-size: 1.2rem"
+                          :style="{
+                            fontSize: $vuetify.breakpoint.mdAndUp
+                              ? '1.2rem'
+                              : '0.9rem',
+                          }"
                         ></span>
                       </p>
                     </template>
                     <template v-slot:item="{ item }">
-                      <v-list-item-avatar
-                        color="indigo"
-                        class="headline font-weight-light white--text"
-                      >
-                        {{ item.emoji }}
+                      <v-list-item-avatar class="headline font-weight-light">
+                        <v-icon>mdi-city</v-icon>
                       </v-list-item-avatar>
                       <v-list-item-content>
                         <v-list-item-title
@@ -223,8 +233,12 @@
                     class="mt-2 text-capitalize subtitle"
                     text
                     @click="toggleAddCityDrawer(true)"
-                    ><v-icon left>mdi-map-marker-off-outline</v-icon> City Data
-                    Missing? (Add a City)</v-btn
+                    ><v-icon left>mdi-map-marker-alert-outline</v-icon> City
+                    <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1"
+                      >Data</span
+                    >
+                    Missing? (Add
+                    {{ $vuetify.breakpoint.mdAndUp ? "a City)" : "it)" }}</v-btn
                   >
                   <v-btn block :key="3" v-if="selectedCity" class="mt-2"
                     ><v-icon left>mdi-map-marker-check</v-icon> Found My City
@@ -234,7 +248,9 @@
               </div>
 
               <!-- No result -->
-              <div v-else class="no-result apollo">No result :(</div>
+              <div v-else class="no-result apollo text-center mt-2">
+                Loading
+              </div>
             </template>
           </ApolloQuery>
         </v-col>

@@ -17,11 +17,32 @@
           width="40"
         />
 
-        <v-toolbar-title class="headline">Geo Cities</v-toolbar-title>
+        <v-toolbar-title
+          class="headline"
+          v-if="$vuetify.breakpoint.mdAndUp"
+          :class="
+            $vuetify.theme.dark ? 'white--text' : 'grey--text text--darken-3'
+          "
+          ><strong>Geo</strong>
+          <span class="font-weight-normal">Cities</span></v-toolbar-title
+        >
       </div>
 
       <v-spacer></v-spacer>
-      <v-switch v-model="$vuetify.theme.dark" hide-details></v-switch>
+      <v-btn
+        icon
+        @click="toggleSearchMode"
+        :class="$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-1'"
+        ><v-icon :color="searchMode ? 'primary' : ''">{{
+          searchMode ? "mdi-magnify-minus" : "mdi-magnify"
+        }}</v-icon></v-btn
+      >
+      <v-switch v-model="$vuetify.theme.dark" hide-details>
+        <template v-slot:label>
+          <v-icon v-if="!$vuetify.theme.dark">mdi-weather-sunny</v-icon>
+          <v-icon v-else>mdi-weather-night</v-icon>
+        </template>
+      </v-switch>
       <v-btn
         to="/"
         class="mx-2"
@@ -50,6 +71,7 @@
 import CityDrawer from "./components/shared/CityDrawer.vue";
 import Snackbar from "./components/shared/Snackbar.vue";
 import StateDrawer from "./components/shared/StateDrawer.vue";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: { StateDrawer, Snackbar, CityDrawer },
   name: "App",
@@ -57,7 +79,11 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    ...mapGetters(["searchMode"]),
+  },
   methods: {
+    ...mapActions(["toggleSearchMode"]),
     checkScroll(e) {
       console.log({ e });
     },

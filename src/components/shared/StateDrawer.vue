@@ -2,12 +2,11 @@
   <v-navigation-drawer
     :value="showAddStateDrawer && selectedCountry"
     style="z-index: 6"
-    :style="{ width: $vuetify.breakpoint.smAndDown ? '100vw' : '' }"
+    :style="{ width: $vuetify.breakpoint.smAndDown ? '100vw' : '256px' }"
     right
     app
-    temporary
   >
-    <v-toolbar height="64px">
+    <v-toolbar height="72px">
       <v-btn icon @click="toggleAddStateDrawer(false)" text>
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
@@ -46,13 +45,10 @@
         v-model="stateData.stateCode"
         placeholder="e.g. TX (Texas)"
       ></v-text-field>
-
-      <v-text-field
-        readonly
-        :value="lat"
-        hint="click/tap the map or drag the marker to set coordinates"
-        label="latitude"
-      ></v-text-field>
+      <v-alert color="info" dark class="caption py-2"
+        >⚠ click map or drag marker to set coordinates</v-alert
+      >
+      <v-text-field readonly :value="lat" label="latitude"></v-text-field>
 
       <v-text-field readonly :value="long" label="longitude"></v-text-field>
       <v-expand-transition>
@@ -69,7 +65,12 @@
           </div>
         </v-alert>
       </v-expand-transition>
-      <v-btn :disabled="!formValid" block @click="checkStateData"
+      <v-btn
+        x-large
+        color="primary"
+        :disabled="!formValid"
+        block
+        @click="checkStateData"
         ><v-icon>mdi-plus-thick</v-icon> Add this State</v-btn
       >
     </v-container>

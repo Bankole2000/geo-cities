@@ -9,6 +9,7 @@ export default new Vuex.Store({
     selectedState: null,
     showAddStateDrawer: false,
     showAddCityDrawer: false,
+    searchMode: true,
     lat: 0, 
     long: 0,
     toast: {
@@ -49,6 +50,9 @@ export default new Vuex.Store({
         state.toast[key] = payload[key];
       }
       state.toast.icon = payload.sclass ? state.toast.icons[payload.sclass] : "";
+    }, 
+    toggleSearchMode(state){
+      state.searchMode = !state.searchMode
     }
   },
   actions: {
@@ -72,6 +76,9 @@ export default new Vuex.Store({
         commit("showToast", { show, sclass, message, timeout });
         resolve(timeout);
       });
+    },
+    toggleSearchMode({commit},){
+      commit("toggleSearchMode");
     }
   },
   getters: {
@@ -95,6 +102,9 @@ export default new Vuex.Store({
     }, 
     toast(state) {
       return state.toast;
+    }, 
+    searchMode(state){
+      return state.searchMode;
     }
   },
   modules: {
