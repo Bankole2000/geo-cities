@@ -1,0 +1,8 @@
+query statesByCountry($countryCode: CountryCode!) {
+  statesByCountry(countryCode: $countryCode) {
+    name
+    stateCode
+    latitude
+    longitude
+  }
+}
