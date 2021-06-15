@@ -15,11 +15,15 @@
         @click="moveMarker"
         :center="[latitude, longitude]"
       >
+        <!-- https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' -->
+        <!-- : 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png' -->
+        <!-- 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' -->
+        <!-- : 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' -->
         <l-tile-layer
           :url="
             !$vuetify.theme.dark
               ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-              : 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+              : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
           "
         ></l-tile-layer>
         <l-marker draggable @dragend="moved" :lat-lng="[latitude, longitude]">
