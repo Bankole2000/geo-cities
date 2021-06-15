@@ -197,6 +197,23 @@
                     item-text="name"
                     placeholder="Select A City..."
                   >
+                    <template v-slot:append-outer>
+                      <v-tooltip top>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            @click="useUserLocation"
+                            color="primary"
+                            icon
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                          >
+                            <v-icon>mdi-map-marker</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Use My Current Location</span>
+                      </v-tooltip>
+                    </template>
                     <template v-slot:selection="{ item }">
                       <p class="my-0">
                         <span left class="mr-2" v-html="item.stateCode">{{
@@ -293,6 +310,7 @@ export default {
       "toggleAddCityDrawer",
       "setSelectedCountry",
       "setSelectedState",
+      "showToast",
     ]),
     foundCity(e, type) {
       console.log({ e, type });
@@ -317,6 +335,37 @@ export default {
         this.toggleAddCityDrawer(false);
       }
       this.$emit("foundCity", { city: e, type });
+    },
+    useUserLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            this.$emit("foundCity", {
+              city: { latitude, longitude },
+              type: "city",
+            });
+
+            console.log(position);
+          },
+          (error) => {
+            this.showToast({
+              show: true,
+              sclass: "error",
+              message: "Error getting Your location",
+              timeout: 2000,
+            });
+            console.log(error);
+          }
+        );
+      } else {
+        this.showToast({
+          show: true,
+          sclass: "error",
+          message: "Your Geolocation is disabled",
+          timeout: 2000,
+        });
+      }
     },
   },
 };

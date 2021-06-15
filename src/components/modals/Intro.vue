@@ -10,7 +10,7 @@
       <v-card-title class="headline"> 👋 Hello World </v-card-title>
       <v-divider></v-divider>
       <v-card-text
-        class="pt-2"
+        class="pt-2 pb-0"
         :class="
           $vuetify.theme.dark
             ? 'grey--text text--lighten-3'
@@ -29,6 +29,10 @@
           own!?) please add them kk? I'd be really grateful if you could help.
           Thanks 🙂
         </p>
+        <v-checkbox
+          @change="toggleDontShow"
+          label="Don't show this message again"
+        ></v-checkbox>
         <v-expand-transition>
           <v-alert v-show="message" color="info" dark>{{ message }}</v-alert>
         </v-expand-transition>
@@ -62,6 +66,19 @@ export default {
         this.message = "";
       }, 1000);
     },
+    toggleDontShow(e) {
+      console.log({ e });
+      if (e) {
+        localStorage.setItem("GCShow", "false");
+      } else {
+        localStorage.removeItem("GCShow");
+      }
+    },
+  },
+  beforeMount() {
+    if (localStorage.getItem("GCShow")) {
+      this.dialog = false;
+    }
   },
 };
 </script>

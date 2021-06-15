@@ -45,6 +45,7 @@
       </v-switch>
       <v-btn
         to="/"
+        @click="refresh"
         class="mx-2"
         color="primary"
         :icon="$vuetify.breakpoint.smAndDown"
@@ -86,6 +87,9 @@ export default {
     ...mapActions(["toggleSearchMode"]),
     checkScroll(e) {
       console.log({ e });
+    },
+    refresh() {
+      window.location.reload();
     },
   },
 };
