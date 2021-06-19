@@ -102,8 +102,8 @@ export default {
           !!value ||
           "Required. Usually the first Letter and next consonant of the state name",
         max: (v) =>
-          v?.length <= 2 ||
-          "Max 2 characters - Usually the first Letter and next consonant of the state name",
+          v?.length <= 5 ||
+          "Max 5 characters - Usually the first Letter and next consonant of the state name",
       },
     };
   },
@@ -113,7 +113,7 @@ export default {
       if (
         this.stateData.name &&
         this.stateData.stateCode &&
-        this.stateData.stateCode.length <= 2
+        this.stateData.stateCode.length <= 5
       ) {
         return true;
       }
